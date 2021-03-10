@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-<h1>짱구는 못말려!</h1>
+
 	
 	<!-- 로그인 했을 때와 안했을 때 -->
 <ul>	
@@ -59,7 +59,7 @@
 						aria-expanded="false">
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/">물짱들의 놀이터</a>
+					<a class="navbar-brand" href="/">슬기로운 물생활</a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
