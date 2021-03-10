@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- db.properties db에 설정한 값을 읽어오기 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:db.properties</value>
+		</property>
+	</bean>
+	
+	<!-- db.properties의 설정 값을 읽어서 setting value에 적힌 이름들과 설정에 적은 이름과 같은지 비교해야 한다 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+	</bean>
+		
+	<!-- 트랙잭션 관리를 위한 빈설정 //  위의 dataSource객체를 spring이 트랜잭션 매니저로 만들어서 commit과 roll back을 자동으로 관리 해준다-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- sqlSessionFactory //(내가 연결하려는 DB와 그 안에서 접속하는 서버를 결정하는 빈) value값에 쓰여진 경로가 정확히 있냐? 파일명이 동일하냐? 라는 것을 확인 해야 한다.-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+	
+	<!-- sqlSession // sqlSession객체를 빈으로 설정하기 위해 위의 4가지 빈을 설정한 것이다. 그러니깐 중요한 빈임! -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- file upload를 위한 bean 설정 -->
+	<bean name="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- 파일 업로드시 용량 제한을 걸어둔 변수 -->
+		<property name="maxUploadSize" value="10485760"></property>
+	</bean>		
+		
+</beans>

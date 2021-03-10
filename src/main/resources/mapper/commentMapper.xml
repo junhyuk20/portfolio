@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="my.web.note.dao.CommentMapper">
+	
+	<insert id="commentInsert" parameterType="comment">
+		insert into
+			c_table(
+				comment_no
+				,board_no
+				,member_id
+				,member_nm
+				,comment_contents
+			)values(
+				c_table_seq.nextval
+				,#{board_no}
+				,#{member_id}
+				,#{member_nm}
+				,#{comment_contents}
+			)
+	</insert>
+	
+	<select id="commentList" parameterType="int" resultType="comment">
+		select
+			comment_no
+			,board_no
+			,member_id
+			,member_nm
+			,comment_contents
+			,comment_indate
+		from
+			c_table
+		where
+			board_no = #{board_no}
+		order by
+			comment_indate desc
+		
+	</select>
+	
+	<delete id="commentDelete" parameterType="comment">
+		delete from
+			c_table
+		where
+			comment_no = #{comment_no}
+		and
+			board_no = #{board_no}
+		and
+			member_id = #{member_id}
+	</delete>
+	
+</mapper>
