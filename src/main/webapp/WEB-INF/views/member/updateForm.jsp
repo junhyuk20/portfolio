@@ -18,7 +18,7 @@
 					return false;
 				}
 			if(member_pw == '' || member_pw.length == 0){
-					alert('비밀번호르 입력해 주세요');
+					alert('비밀번호를 입력해 주세요');
 					return false;
 			}
 			if(member_pw_ck != member_pw){
