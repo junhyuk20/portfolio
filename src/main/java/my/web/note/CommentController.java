@@ -23,7 +23,7 @@ public class CommentController {
 	@Autowired
 	private CommentService cs;
 	
-	//댓글 입력 받기
+	//댓글 입력 
 	@ResponseBody
 	@RequestMapping(value="/commentWrite", method=RequestMethod.POST)
 	public String commentWrite(int board_no, String comment_contents) {

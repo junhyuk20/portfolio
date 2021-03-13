@@ -37,10 +37,11 @@ import my.web.note.vo.CommentVO;
 @RequestMapping(value="/board")
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	//업로드경로
+	
+	//업로드경로 입니다.
 	private String uploadPath = "/boardfile";
 	
-	//페이징 이용을 위한 변수
+	//페이징 이용을 위한 변수 입니다.
 		private final int COUNTPERPAGE = 10;
 		private final int PAGEPERGROUP = 5;
 	
@@ -52,7 +53,9 @@ public class BoardController {
 	private HttpSession session;
 	
 	
-	//게시글 목록
+	//게시글 목록입니다.
+	//처음 홈 페이지를 들어왔을 때 현재페이지를 1로 주었습니다.
+	//검색을 하지 않을 수도 있으므로 기본값으로"" 을 주었습니다.
 	@RequestMapping(value="/boardList", method=RequestMethod.GET)
 	public String boardList(
 			@RequestParam(value="page", defaultValue = "1") int page,
@@ -71,25 +74,27 @@ public class BoardController {
 		model.addAttribute("navi", navi);
 		return "board/boardList";
 	}
-	//게시글 양식
+	//게시글 양식 입니다.
 	@RequestMapping(value="/writeForm", method=RequestMethod.GET)
 	public String boardWriteForm() {
 		return "board/boardWriteForm";
 	}
-	//게시글로 올릴 정보
+	//게시글로 입력 입니다.
 	@RequestMapping(value="/boardWrite", method=RequestMethod.POST)
 	public String boardWrite(BoardVO board, MultipartFile upload) {
 		
 		if (!upload.isEmpty()) {
-			//(물리적인 저장)
+			
+			//물리적인 저장 
 			 String savedfile = FileService.saveFile(upload, uploadPath);
-			//(논리적인 저장) 
+			
+			 //논리적인 저장 db에 저장되는 형식 
 			 board.setSavedfile(savedfile);
 			 board.setOriginalfile(upload.getOriginalFilename());
 		}
 		return bs.boardInsert(board) ;
 	}
-	//게시글 보기
+	//게시글 보기 입니다.
 	@RequestMapping(value="/boardRead", method=RequestMethod.GET)
 	public String boardRead(int board_no, Model model) {
 		
@@ -97,20 +102,20 @@ public class BoardController {
 		model.addAttribute("list", cs.commentList(board_no));
 		return "board/readForm";
 	}
-	//게시글 보기에서 수정 버튼 눌러서 온 수정 폼
+	//게시판에서 수정할 정보를 가져오는 컨트롤러 입니다.
 		@RequestMapping(value="/updateForm", method=RequestMethod.GET)
 		public String boardUpdateForm(int board_no, Model model) {
 			
 			model.addAttribute("list",bs.boardRead(board_no));
 			return "board/updateForm";
 		}
-		// 수정폼에서 수정할 내용을 받는 컨트롤러
+	// 수정을 진행하는 컨트롤러 입니다.
 		@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
 		public String boardUpdate(BoardVO board) {
 			return bs.boardUpdate(board);
 		}
 		
-	//자신의 게시글 삭제
+	//게시글 삭제 입니다. 
 	@RequestMapping(value="/boardDelete", method=RequestMethod.GET)
 	public String boardDelete(BoardVO board) {
 		int cnt = bs.boardDelete(board);
@@ -136,7 +141,7 @@ public class BoardController {
 		// 설정만 해놓은 상태
 		// Content-Disposition : 내가 지금 응답으로 보내려는 컨텐츠가, attachment;filename : UTF-8형식으로인코딩한 첨부파일 이야
 		// 그럼 브라우저가 이 코드를 받고선 내가 읽을 수 있는 파일이지만 읽지말고 다운로드 해야 겠다 라고 인식하고 다운로드 기능을 하게된다.
-		// 인코딩을 하는 이유는 파일이름에 영어 이외의 국가 언어나 특수 문자가 있을 수 있으니 UTF-8 형식으로 인코딩을 하는 것이다.	
+		// 인코딩을 하는 이유는 파일이름에 영어 이외의 국가 언어나 특수 문자가 있을 수 있으니 UTF-8 형식으로 인코딩을 하는 것 입니다.	
 			response.setHeader("Content-Disposition", " attachment;filename="+ URLEncoder.encode(originalfile, "UTF-8"));
 		
 		// 이 인셉션은 사용자가 UTF-8의 철자를 틀렸을 때 띄우는 익셉션
@@ -156,10 +161,10 @@ public class BoardController {
 			fileout = response.getOutputStream(); // 경로 연결 
 			
 			//Spring의 파일관련유틸, 파일이 전달되는 코드
-			//filein,fileout 의미는 inPut스트림으로부터 전달받은 파일을 복사해서 outPut스트림으로으로  복사하라는 뜻이다.
+			//filein,fileout 의미는 inPut스트림으로부터 전달받은 파일을 복사해서 outPut스트림으로으로  복사하라는 뜻 입니다.
 			FileCopyUtils.copy(filein, fileout);
 			
-			// 이제 다 사용 하였으니깐 close메서드를 통해서 연결을 종료 하는 것이다
+			// 이제 다 사용 하였으니깐 close메서드를 통해서 연결을 종료 합니다.
 			filein.close();
 			fileout.close();
 		// 경로가 맞지 않았을 때 익셉션

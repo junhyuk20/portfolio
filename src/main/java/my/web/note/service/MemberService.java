@@ -36,7 +36,7 @@ public class MemberService {
 	public String memberLogin(MemberVO member) {
 		MemberVO loginCheck = dao.memberSelectOne(member.getMember_id());
 		String page = "";
-		
+		// 로그인 시 db에 가입된 정보가 존재하며 가입된 비밀번호와 현재 입력한 비밀번호가 같은지를 비교 하여 결과를 반환하는 기능입니다.
 		if (loginCheck != null && loginCheck.getMember_pw().equals(member.getMember_pw())) {
 			System.out.println("로그인 성공");
 			session.setAttribute("loginId", loginCheck.getMember_id());

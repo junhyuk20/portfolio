@@ -13,7 +13,7 @@ public class CommentDAO {
 
 	@Autowired
 	SqlSession session;
-	
+	// 댓글 입력 입니다.
 	public int commentInsert(CommentVO cmt) {
 		CommentMapper mapper = session.getMapper(CommentMapper.class);
 		int cnt = 0;
@@ -25,7 +25,7 @@ public class CommentDAO {
 		}
 		return cnt;
 	}
-	
+	// 댓글 리스트 입니다
 	public ArrayList<CommentVO> commentList(int board_no){
 		CommentMapper mapper = session.getMapper(CommentMapper.class);
 		ArrayList<CommentVO> list = null ;
@@ -37,7 +37,7 @@ public class CommentDAO {
 		}
 		return list;
 	}
-
+	// 댓글 삭제 입니다
 	public int commentDelete(CommentVO cmt) {
 		CommentMapper mapper = session.getMapper(CommentMapper.class);
 		int cnt = 0;
@@ -49,6 +49,7 @@ public class CommentDAO {
 		}
 		return cnt;
 	}
+	// 댓글 수정 입니다.
 	public int commentUpdate(CommentVO cmt) {
 		CommentMapper mapper = session.getMapper(CommentMapper.class);
 		int cnt = 0;

@@ -20,13 +20,14 @@ public class BoardService {
 	@Autowired
 	private HttpSession session;
 	
+	//게시글 등록 서비스 입니다.
 	public String boardInsert(BoardVO board) {
 		String member_id = (String)session.getAttribute("loginId");
 		board.setMember_id(member_id);
 		
 		int cnt = dao.boardInsert(board);
 		String page = "";
-		
+	//게시글이 잘 등록이 되었는지 확인하는 구간 및 그에 맞는 페이지를 반환해주는 기능입니다.
 		if (cnt == 0) {
 			System.out.println("게시글 등록 실패");
 			page = "redirect:/board/writeForm";
@@ -36,6 +37,7 @@ public class BoardService {
 		}
 		return page;
 	}
+	//검색 기능을 사용하기 위해서 vo클래스로 등로 되지않은 변수들을 hash map을 이용해서 값을 넣어주는 서비스 입니다.
 	public ArrayList<HashMap<String, Object>> boardList(String searchType, String searchText,
 		int startRecord, int countPerPage){
 		
@@ -48,7 +50,7 @@ public class BoardService {
 		return list;
 				
 	}
-	
+	//b_table에 member_nm의 컬럼이 없으므로 hashmap을 통해서 가져옵니다.
 	public  ArrayList<HashMap<String, Object>> selectAll() {
 		return dao.selectAll();
 	}
@@ -57,16 +59,20 @@ public class BoardService {
 		dao.updateHits(board_no);
 		return dao.boardRead(board_no);
 	}
+	//게시물을 삭제하는 서비스 입니다.
 	public int boardDelete(BoardVO board) {
+		//삭제 주소창을 복사해서 login하지 않고 악의적으로 삭제할 수 있는 사고를 방지 하기위해 member_id를 추가해 주었습니다. 
 		String member_id = (String)session.getAttribute("loginId");
 		board.setMember_id(member_id);
 		return dao.boardDelete(board);
 	}
+	
 	public HashMap<String, Object> selectOne(BoardVO board) {
 		String member_id = (String)session.getAttribute("loginId");
 		board.setMember_id(member_id);
 		return dao.selectOne(board);
 	}
+	//게시물을 수정하는 서비스 입니다.
 	public String boardUpdate(BoardVO board) {	
 		String member_id = (String)session.getAttribute("loginId");
 		board.setMember_id(member_id);
