@@ -67,7 +67,7 @@ public class MemberController {
 	public String memberUpdate(MemberVO member) {
 		return ms.memberUpdate(member);
 	}
-	// 개인정보 변경후 보여줄 페이지 입니다.
+	// 개인정보 변경후 수정된 정보 입니다.
 	@RequestMapping(value="/selectOne", method=RequestMethod.GET)
 	public String selectOne(Model model) {
 		String member_id = (String)session.getAttribute("loginId");
