@@ -49,5 +49,16 @@ public class CommentDAO {
 		}
 		return cnt;
 	}
+	public int commentUpdate(CommentVO cmt) {
+		CommentMapper mapper = session.getMapper(CommentMapper.class);
+		int cnt = 0;
+			
+			try {
+				cnt = mapper.commentUpdate(cmt);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return cnt;
+	}
 	
 }

@@ -17,4 +17,6 @@ public interface CommentMapper {
 
 	public int commentDelete(CommentVO cmt);
 	
+	public int commentUpdate(CommentVO cmt);
+	
 }

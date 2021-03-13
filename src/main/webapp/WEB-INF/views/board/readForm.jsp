@@ -57,36 +57,27 @@
 			});
 	
 		}
+		function commentUpdate(comment_no, board_no, comment_contents) {
+					var str = '';
 
- 	function commentUpdateForm(comment_no, comment_contents) {
+					str += '<form action="/comment/commentUpdate", method="post">';
+					str += '<input type="hidden" name="comment_no" value="'+comment_no+'">';
+					str += '<input type="hidden" name="board_no" value="'+board_no+'">';
+					str += '<input type="text" name="comment_contents" value="'+comment_contents+'">';
+					str += '<input type="submit" value="댓글 수정">';
+					str += '</form>';
 
-		
- 		//해당 리플번호를 붙여 생성한 <div>태그에 접근
-		var form = document.createElement("form");
+					document.getElementById('div').innerHTML = str;
+						
+			}
 
-		form.setAttribute("action","/board/commentUpdate");
-		form.setAttribute("method","post");
-
-		documnet.body.appendChild(form);
-
-		var input_id = document.createElement("input");
-
-		input_id.setAttribute("type", "hidden");
-		input_id.setAttribute("name", "comment_no");
-		input_id.setAttribute("value", comment_no);
-		input_id.setAttribute("type", "text");
-		input_id.setAttribute("name", "comment_contents");
-		input_id.setAttribute("value", comment_contents);
-
-		form.appendChild(input_id);
-		form.submit();		
-		
- 	 	}
-
+	
+ 	
 		
 </script>
 </head>
 <body>
+
 
 	<!-- 로그인 했을 때와 안했을 때 -->
 <ul>	
@@ -204,7 +195,6 @@
 			
 			
 			<!-- 댓글 작성 -->
-
 			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
 				<div class="row">
 					<div class="col-sm-10">
@@ -228,20 +218,25 @@
 						<td class="td2">${list.comment_contents }</td>
 						<td class="td3">${list.comment_indate }</td>
 						<c:if test="${sessionScope.loginId == list.member_id }">
-							
 							<td>
 								<a href="/comment/commentDelete?comment_no=${list.comment_no }&board_no=${list.board_no}">삭제</a>
+							</td> 
+							<td>
+								<a href="javascript:commentUpdate(${list.comment_no}, ${list.board_no}, '${list.comment_contents}')">수정</a>
 							</td>
 						</c:if>
 					</tr>
 				</c:forEach>
 			</table>				
 		<!-- 댓글 보여 주기 끝 --> 
+		
+		<!-- 댓글 수정폼 -->	
+			<div id="div" >
 			
-			<div id="div">
-			
-			</div>
-			
+			</div> 
+		<!-- 댓글 수정폼 -->
+		
+		
 		</div>
 	</div>
 </body>

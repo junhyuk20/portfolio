@@ -48,4 +48,17 @@
 			member_id = #{member_id}
 	</delete>
 	
+	<update id="commentUpdate" parameterType="comment">
+		update
+			c_table
+		set
+			comment_contents = #{comment_contents}
+		where
+			comment_no = #{comment_no}
+		and
+			board_no =	#{board_no}
+		and
+			member_id = #{member_id}
+	</update>
+	
 </mapper>

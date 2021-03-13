@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import my.web.note.dao.CommentDAO;
+import my.web.note.dao.CommentMapper;
 import my.web.note.vo.CommentVO;
 
 @Service
@@ -29,6 +30,12 @@ public class CommentService {
 
 	public int commentDelete(CommentVO cmt) {
 		int cnt = dao.commentDelete(cmt);
+		
+		return cnt;
+	}
+	public int commentUpdate(CommentVO cmt) {
+		int cnt = dao.commentUpdate(cmt);
+		
 		return cnt;
 	}
 }
