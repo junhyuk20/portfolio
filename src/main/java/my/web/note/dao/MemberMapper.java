@@ -9,6 +9,8 @@ public interface MemberMapper {
 	public MemberVO memberSelectOne(String member_id);
 	
 	public int memberUpdate(MemberVO member);
+
+	public String idCheck(String member_id);
 	
 	
 }

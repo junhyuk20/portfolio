@@ -107,21 +107,6 @@
 					<img src="/resources/images/guppy4.jpg" alt="구피1">
 				</div>
 				<div class="item">
-					<img src="/resources/images/view2.jpg" alt="구피2">
-				</div>
-				<div class="item">
-					<img src="/resources/images/view3.jpg" alt="구피3">
-				</div>
-				<div class="item">
-					<img src="/resources/images/view4.jpg" alt="구피4">
-				</div>
-				<div class="item">
-					<img src="/resources/images/guppy5.jpg" alt="구피5">
-				</div>
-				<div class="item">
-					<img src="/resources/images/guppy6.jpg" alt="구피6">
-				</div>
-				<div class="item">
 					<img src="/resources/images/guppy7.jpg" alt="구피7">
 				</div>
 				<div class="item">

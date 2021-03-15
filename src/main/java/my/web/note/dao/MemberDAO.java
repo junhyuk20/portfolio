@@ -45,5 +45,16 @@ public class MemberDAO {
 		}
 		return cnt;
 	}
+	public String idCheck(String member_id) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		String idCheck = null;
+		
+		try {
+			idCheck = mapper.idCheck(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return idCheck;
+	}
 	
 }

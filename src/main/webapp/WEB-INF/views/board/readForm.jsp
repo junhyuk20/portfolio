@@ -154,7 +154,7 @@
 			<table class="table table-striped" style="text-align: center; boder: 1px solid #dddddd ">
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글보기 </th>
+						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글 보기 </th>
 					
 					</tr>
 				</thead>

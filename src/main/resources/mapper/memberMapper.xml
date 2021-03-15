@@ -17,6 +17,14 @@
 					,#{member_nm}
 				)
 	</insert>
+	<select id="idCheck" parameterType="String" resultType="String">
+		select
+			member_id
+		from
+			m_table
+		where
+			member_id = #{member_id}
+	</select>
 	
 	<select id="memberSelectOne" parameterType="String" resultType="member">
 		select

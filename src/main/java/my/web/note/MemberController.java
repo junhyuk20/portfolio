@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import my.web.note.service.MemberService;
 import my.web.note.vo.MemberVO;
@@ -24,6 +25,13 @@ public class MemberController {
 	@RequestMapping(value="/joinForm", method=RequestMethod.GET)
 	public String joinForm() {
 		return "member/joinForm";
+	}
+	//아이디 중복을 확인하는 컨트롤러 입니다.
+	@ResponseBody
+	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
+	public boolean idCheck(String member_id) {
+		
+		return ms.idCheck(member_id);
 	}
 	// 로그인 컨트롤러 입니다.
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)

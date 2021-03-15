@@ -122,7 +122,7 @@
 						<th style="background-color: #eeeeee; text-align: center;">조회수</th>
 					</tr>
 				</thead>
-				<!-- for문으로 게시판 작성한 거 보여주기 -->
+				<!-- for을 통해 작성된 게시글 보여 주기 -->
 				<tbody>
 					<c:forEach var="list" items="${list }" varStatus="status">
 						<tr>

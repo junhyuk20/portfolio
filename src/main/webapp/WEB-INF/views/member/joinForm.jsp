@@ -7,18 +7,52 @@
 <meta name="viewport" content="width=device-width", initial-scale="1">
 <link rel = "stylesheet" href="/resources/css/bootstrap.css">
 <title>[회원가입]</title>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="/resources/js/bootstrap.js"> </script>	 
 <script type="text/javascript">
+
+	function idCheck(){
+			var member_id = $("#member_id").val();
+			if(member_id == '' || member_id.length == 0) {
+					alert("아이디를 입력해 주새요.");
+				}
+
+			$.ajax({
+				url: "/member/idCheck",
+				type: "post",
+				data:{
+						member_id: $("#member_id").val()
+				},
+				success: function(data){
+							if(data == true ){
+									alert("사용 가능한 아이디 입니다.")
+							} else{
+									alert("사용할 수 없는 아이디 입니다.")
+							}
+							
+					},
+				error: function(e){
+						alert("통신실패");
+						console.log(e);
+					}
+		});
+	}
+
+
+
+
 	function formCheck(){
 			var member_id = document.getElementById('member_id').value;
 			var member_pw = document.getElementById('member_pw').value;
 			var member_pw_ck = document.getElementById('member_pw_ck').value;
 			var member_nm = document.getElementById('member_nm').value;
+
 			if(member_id ==  "" || member_id.length == 0){
 					alert('아이디를 입력해 주세요');
 					return false;
 				}
 			if(member_pw == '' || member_pw.length == 0){
-					alert('비밀번호르 입력해 주세요');
+					alert('비밀번호를 입력해 주세요');
 					return false;
 			}
 			if(member_pw_ck != member_pw){
@@ -31,6 +65,8 @@
 			}
 			return true;
 		}
+
+		
 	
 </script>
 </head>
@@ -71,6 +107,7 @@
 					<h3 style="text-align: center:">회원가입 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디" id="member_id" name="member_id" maxlength="20">
+						<button type="button" class="btn btn-primary" onclick="idCheck();">아이디 중복확인</button>
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호"  id="member_pw" name="member_pw" maxlength="20">
@@ -86,8 +123,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="/resources/js/bootstrap.js"> </script>	 
+	
 
 </body>
 </html>

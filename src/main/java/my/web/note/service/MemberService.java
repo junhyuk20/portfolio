@@ -16,7 +16,7 @@ public class MemberService {
 	private MemberDAO dao;
 	@Autowired
 	private HttpSession session;
-	
+	// 회원가입 서비스 기능입니다.
 	public String memberInsert(MemberVO member) {
 		
 		int cnt = dao.memberInsert(member);
@@ -32,11 +32,12 @@ public class MemberService {
 		
 		return page;
 	}
-	
+	//로그인 처리를 해주는 서비스 입니다.
 	public String memberLogin(MemberVO member) {
 		MemberVO loginCheck = dao.memberSelectOne(member.getMember_id());
 		String page = "";
-		// 로그인 시 db에 가입된 정보가 존재하며 가입된 비밀번호와 현재 입력한 비밀번호가 같은지를 비교 하여 결과를 반환하는 기능입니다.
+		
+		// 로그인 시 현재 입력한 정보로 db에 존재여부와 db에의비밀번호와 현재 입력한 비밀번호가 같은지를 비교한 결과로 login처리를 하는 기능입니다.
 		if (loginCheck != null && loginCheck.getMember_pw().equals(member.getMember_pw())) {
 			System.out.println("로그인 성공");
 			session.setAttribute("loginId", loginCheck.getMember_id());
@@ -49,16 +50,16 @@ public class MemberService {
 		
 		return page;
 	}
-	
+	// 로그아웃 처리를 하는 서비스 입니다.
 	public void logOut() {
 		session.removeAttribute("loginId");
 	}
-	
+	// 한사람의 정보를 가져오는 서비스 입니다.
 	public MemberVO memberSelectOne(String member_id) {
 		return dao.memberSelectOne(member_id);
 	}
 	
-
+	//회원 정보를 수정하는 서비스 입니다.
 	 public String memberUpdate(MemberVO member) { 
 		 int cnt = dao.memberUpdate(member); 
 		 String page = "";
@@ -72,5 +73,20 @@ public class MemberService {
 		 } 
 		 return page; 
 	 }
+	 // 아이디 중복확인 기능 서비스 입니다.
+	public boolean idCheck(String member_id) {
+		boolean data;
+		String idCheck = dao.idCheck(member_id);
+		
+		if(member_id.equals(idCheck) || member_id.length() == 0) {
+			System.out.println("사용할 수 없는 아이디 입니다.");
+			data = false;
+			
+		} else {
+			System.out.println("사용가능한 아이디 입니다.");
+			data = true;
+		}
+		return data;
+	}
 	 
 }

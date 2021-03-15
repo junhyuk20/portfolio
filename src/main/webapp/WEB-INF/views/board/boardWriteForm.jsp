@@ -9,6 +9,22 @@
 <link rel = "stylesheet" href="/resources/css/bootstrap.css">
 <link rel = "stylesheet" href="/resources/css/custom.css">
 <title>[물생활 공유]</title>
+<script type="text/javascript">
+	function formCheck() {
+			var board_title = $("#board_title").val();
+			var board_context = $("#board_context").val();
+
+			if(board_title == '' || board_title.length == 0) {
+					alert("제목을 입력해 주세요.");
+					return false;
+				}
+			if(board_context == '' || board_context.length == 0){
+					alert("내용을 입력해 주세요.");
+					return false;
+				}
+				return true;
+		}
+</script>
 </head>
 <body>
 
